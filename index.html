@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app='myApp'>
+	<head>
+		<meta charset="utf-8">
+		<title>Ang Form</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/main.css" media="screen" title="no title" charset="utf-8">
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>
+		<script src="/app.js" charset="utf-8"></script>
+	</head>
+	<body ng-controller='myController'>
+		<div class="formCity" >
+			<form name='myForm' action="javascript:void(0)" method="post">
+				<div ng-class="{'form-group': myForm.username.$pristine, 'has-error': (myForm.username.$invalid && myForm.username.$dirty), 'has-success': myForm.username.$valid}">
+					<label class="control-label" for="username">Username:</label>
+					<input type="text" class="form-control" name="username" ng-model='user.username'
+					ng-minlength='3'
+					ng-maxlength='8'
+					required>
+				</div>
+				<div class='idk' ng-messages='myForm.username.$error'>
+					<h6 ng-message='minlength'>*Your name is too short</h6>
+					<h6 ng-message='maxlength'>*Your name is too long</h6>
+				</div>
+
+				<div ng-class="{'form-group': myForm.password.$pristine, 'has-error': (myForm.password.$invalid && myForm.password.$dirty), 'has-success': myForm.password.$valid}">
+					<label class="control-label" ng-class="{'has-error': formCity.password.$invalid}"for="password">Password</label>
+					<input type="text" class="form-control" name='password' ng-model="user.password"
+					ng-minlength='3'
+					ng-maxlength='8'
+					required>
+				</div>
+				<div ng-messages='myForm.password.$error'>
+					<h6 ng-message='minlength'>*Your password is too short</h6>
+					<h6 ng-message='maxlength'>*Your password is too long</h6>
+				</div>
+
+				<div ng-class="{'form-group': myForm.email.$pristine, 'has-error': (myForm.email.$invalid && myForm.email.$dirty), 'has-success': myForm.email.$valid}">
+					<label class="control-label"for="email">Email</label>
+					<input type="email" class="form-control" name="email" ng-model='user.email' required>
+				</div>
+				<div>
+					<h6 ng-show='(myForm.email.$invalid && myForm.email.$dirty)'>*Your email is invalid</h6>
+				</div>
+
+				<div ng-class="{'form-group': myForm.zip.$pristine, 'has-error': (myForm.zip.$invalid && myForm.zip.$dirty), 'has-success': myForm.zip.$valid}">
+					<label class="control-label"for="zip">Zip (5 digits)</label>
+					<input type="number" class="form-control" name="zip" ng-model='user.zip'
+					ng-pattern="/^(\d{5}(-\d{4})?|[A-Z]\d[A-Z] *\d[A-Z]\d)$/"
+					required>
+				</div>
+				<div>
+					<h6 ng-show='(myForm.zip.$invalid && myForm.zip.$dirty)'>*Your zip must be 5 digits</h6>
+				</div>
+
+				<input type="submit" ng-click='showErr()' value="Click Me!">
+			</form>
+		</div>
+	</body>
+</html>
